@@ -1,5 +1,3 @@
-//ESTO NO VA A CAMBIAR CUANDO SE ESTE CREANDO EL BACKEND
-//INICIA/CARGA EL SERVIDOR
 //Importar express
 const express = require('express');
 const serverRouter = require('./routers/serverRouter');

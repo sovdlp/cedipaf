@@ -67,12 +67,14 @@ class ServerController {
     /*deleteUser(req, res) {
         let { id } = req.body;
         console.table({ id });
+
         let tempUser = [];
         users.forEach(element => {
             if (id != element.id) {
                 tempUser.push(element);
             }
         });
+
         users = tempUser;
         if (users != null) {
             res.status(200).json(users);
