@@ -9,11 +9,11 @@ class ServerRouter{
 
     config(){
         const objServerC = new serverController.default();
-        this.router.get("/users", objServerC.getAllUsers);
-        this.router.get("/users/:id", objServerC.getUsers);
-        this.router.post("/users", objServerC.register);
-        this.router.put("/users", objServerC.update);
-        this.router.delete("/users", objServerC.deleteUser);        
+        this.router.get("/documentos", objServerC.getAllDocumentos);
+        this.router.get("/documentos/:remision", objServerC.getDocumentos);
+        this.router.post("/documentos", objServerC.register);
+        this.router.put("/documentos", objServerC.update);
+        //this.router.delete("/documentos", objServerC.deleteDocumento);        
     }
 }
 

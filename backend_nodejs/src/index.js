@@ -4,14 +4,14 @@ const serverRouter = require('./routers/serverRouter');
 //Importar mongoose
 const mongoose = require('mongoose');
 //Importar url de conexión a la BD
-const database = require('./database/db');
+const database = require('./database/despachos');
 //Importar cors
 const cors = require('cors');
 
 class Server{
     //constructor
     constructor(){
-        this.conectarBD();
+        this.conectarDespachos();
         this.app = express();
         //Indicar el puerto por el que se ejecutará el servidor
         this.app.set('port', process.env.PORT || 3000);
@@ -39,9 +39,9 @@ class Server{
         });
     }
 
-    conectarBD(){
-        mongoose.connect(database.db).then(()=>{
-            console.log("Conexión a BD con éxito");
+    conectarDespachos(){
+        mongoose.connect(database.despachos).then(()=>{
+            console.log("Conexión a BD DESPACHOS con éxito");
         }).catch((err)=>{
             console.error("Error de conexión");
         });

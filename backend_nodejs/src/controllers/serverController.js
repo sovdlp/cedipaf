@@ -1,10 +1,10 @@
-const person = require('../models/person');
+const entrega = require('../models/entrega');
 
-let users = [
-    { id: 1, nombre: "Geremias", apellido: "Beltran" },
-    { id: 2, nombre: "Isadora", apellido: "Montiel" },
-    { id: 3, nombre: "Laureano", apellido: "Gómez" },
-    { id: 4, nombre: "Carlos", apellido: "Castro" }
+let documentos = [
+    { remision: 1, cliente: "VITALIS", fecha_envio: "01-01-2022", fecha_entrega: "05-01-2022", transportador: "COORDINADORA", guia_envio: "09210038705", estado: "ENTREGADO" },
+    { remision: 2, cliente: "LEGRAND", fecha_envio: "02-01-2022", fecha_entrega: "05-01-2022", transportador: "COORDINADORA", guia_envio: "09210038706", estado: "DESPACHADO" },
+    { remision: 3, cliente: "CHALVER", fecha_envio: "03-01-2022", fecha_entrega: "05-01-2022", transportador: "COORDINADORA", guia_envio: "09210038707", estado: "DEVUELTO" },
+    { remision: 4, cliente: "VECOL", fecha_envio: "04-01-2022", fecha_entrega: "05-01-2022", transportador: "COORDINADORA", guia_envio: "09210038708", estado: "PENDIENTE" }
 ]
 
 class ServerController {
@@ -13,7 +13,7 @@ class ServerController {
     }
 
     register(req, res) {
-        person.create(req.body, (error, data) => {
+        entrega.create(req.body, (error, data) => {
             if (error) {
                 res.status(500).send();
             } else {
@@ -52,9 +52,9 @@ class ServerController {
         }*/
 
     update(req, res) {
-        let { id, nombre, apellido, edad, email } = req.body;
-        let obj = { nombre, apellido, edad, email };
-        person.findByIdAndUpdate(id, { $set: obj }, (error, data) => {
+        let { remision, cliente, fecha_envio, fecha_entrega, transportador, guia_envio, estado } = req.body;
+        let obj = { cliente, fecha_envio, fecha_entrega, transportador, guia_envio, estado };
+        entrega.findByIdAndUpdate(remision, { $set: obj }, (error, data) => {
             if (error) {
                 res.status(500).send();
             } else {
@@ -83,7 +83,7 @@ class ServerController {
         }
     }*/
 
-    deleteUser(req, res) {
+    /*deleteUser(req, res) {
         let { id } = req.body;
         person.findByIdAndDelete(id, (error, data) => {
             if (error) {
@@ -92,7 +92,7 @@ class ServerController {
                 res.status(200).json(data);
             }
         })
-    }
+    }*/
 
 
     /*    getUsers(req, res) {
@@ -111,9 +111,9 @@ class ServerController {
             }
         }*/
 
-    getUsers(req, res) {
-        let id = req.params.id;
-        person.findById(id, (error, data) => {
+    getDocumentos(req, res) {
+        let remision = req.params.remision;
+        entrega.findById(remision, (error, data) => {
             if (error) {
                 res.status(500).send();
             } else {
@@ -126,8 +126,8 @@ class ServerController {
             res.status(200).json(users);
         }*/
 
-    getAllUsers(req, res) {
-        person.find((error, data) => {
+    getAllDocumentos(req, res) {
+        entrega.find((error, data) => {
             if (error) {
                 res.status(500).send();
             } else {
