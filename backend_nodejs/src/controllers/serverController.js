@@ -1,11 +1,11 @@
 const entrega = require('../models/entrega');
 
-let documentos = [
+/*let entrega = [
     { remision: 1, cliente: "VITALIS", fecha_envio: "01-01-2022", fecha_entrega: "05-01-2022", transportador: "COORDINADORA", guia_envio: "09210038705", estado: "ENTREGADO" },
     { remision: 2, cliente: "LEGRAND", fecha_envio: "02-01-2022", fecha_entrega: "05-01-2022", transportador: "COORDINADORA", guia_envio: "09210038706", estado: "DESPACHADO" },
     { remision: 3, cliente: "CHALVER", fecha_envio: "03-01-2022", fecha_entrega: "05-01-2022", transportador: "COORDINADORA", guia_envio: "09210038707", estado: "DEVUELTO" },
     { remision: 4, cliente: "VECOL", fecha_envio: "04-01-2022", fecha_entrega: "05-01-2022", transportador: "COORDINADORA", guia_envio: "09210038708", estado: "PENDIENTE" }
-]
+]*/
 
 class ServerController {
     constructor() {
