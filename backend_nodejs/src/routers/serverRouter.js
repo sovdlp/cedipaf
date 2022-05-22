@@ -9,7 +9,7 @@ class ServerRouter{
 
     config(){
         const objServerC = new serverController.default();
-        this.router.get("/documentos", objServerC.getAllDocumentos);
+        this.router.get("/entrega", objServerC.getAllDocumentos);
         this.router.get("/documentos/:remision", objServerC.getDocumentos);
         this.router.post("/documentos", objServerC.register);
         this.router.put("/documentos", objServerC.update);

@@ -2,6 +2,9 @@ const mongoose = require('mongoose');
 const schema = mongoose.Schema;
 
 var entregaSchema = new schema({
+    remision: {
+        type: String
+    },
     cliente: {
         type: String
     },
