@@ -52,9 +52,9 @@ class ServerController {
         }*/
 
     update(req, res) {
-        let { remision, cliente, fecha_envio, fecha_entrega, transportador, guia_envio, estado } = req.body;
-        let obj = { cliente, fecha_envio, fecha_entrega, transportador, guia_envio, estado };
-        entrega.findByIdAndUpdate(remision, { $set: obj }, (error, data) => {
+        let { id, remision, cliente, fecha_envio, fecha_entrega, transportador, guia_envio, estado } = req.body;
+        let obj = { remision, cliente, fecha_envio, fecha_entrega, transportador, guia_envio, estado };
+        entrega.findByIdAndUpdate(id, { $set: obj }, (error, data) => {
             if (error) {
                 res.status(500).send();
             } else {
@@ -112,8 +112,8 @@ class ServerController {
         }*/
 
     getDocumentos(req, res) {
-        let remision = req.params.remision;
-        entrega.findById(remision, (error, data) => {
+        let id = req.params.id;
+        entrega.findById(id, (error, data) => {
             if (error) {
                 res.status(500).send();
             } else {
