@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-import ListarPersonajes from '../views/ListarPersonajes.vue'
+import Remisiones from '../views/Remisiones.vue'
 
 Vue.use(VueRouter)
 
@@ -20,9 +20,9 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
   },
   {
-    path: '/listarpersonajes',
-    name: 'ListarPersonajes',
-    component: ListarPersonajes
+    path: '/documentos',
+    name: 'Remisiones',
+    component: Remisiones
   } 
 ]
 
