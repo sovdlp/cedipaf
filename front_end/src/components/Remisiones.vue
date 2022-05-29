@@ -3,7 +3,7 @@
     <h1>Entregas CEDI PAF SAS</h1>
     <br />
 
-    <!-- Inicio formulario para crear los jugadores -->
+    <!-- Inicio formulario para crear las remisiones -->
     <v-form ref="form" v-model="valid" lazy-validation>
       <v-text-field
         v-model="nombre"
