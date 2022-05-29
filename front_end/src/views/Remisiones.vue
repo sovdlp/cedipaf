@@ -7,7 +7,6 @@ import Remisiones from "../components/Remisiones.vue";
 export default {
   components: {
     Remisiones,
-    Remisiones
 },
 };
 </script>
