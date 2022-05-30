@@ -90,6 +90,7 @@
             <th class="text-center">Transportador</th>
             <th class="text-center">Guia Envio</th>
             <th class="text-center">Estado</th>
+            <th class="text-center">ACCIONES</th>
           </tr>
         </thead>
         <tbody>
