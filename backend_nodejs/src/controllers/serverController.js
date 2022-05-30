@@ -52,8 +52,8 @@ class ServerController {
         }*/
 
     update(req, res) {
-        let { id, remision, cliente, fecha_envio, fecha_entrega, transportador, guia_envio, estado } = req.body;
-        let obj = { remision, cliente, fecha_envio, fecha_entrega, transportador, guia_envio, estado };
+        let { id, remision, cliente, fecha_emision, fecha_entrega, transportador, guia_envio, estado } = req.body;
+        let obj = { remision, cliente, fecha_emision, fecha_entrega, transportador, guia_envio, estado };
         entrega.findByIdAndUpdate(id, { $set: obj }, (error, data) => {
             if (error) {
                 res.status(500).send();

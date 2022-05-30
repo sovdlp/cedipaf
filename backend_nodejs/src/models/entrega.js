@@ -8,7 +8,7 @@ var entregaSchema = new schema({
     cliente: {
         type: String
     },
-    fecha_envio: {
+    fecha_emision: {
         type: Date
     },
     fecha_entrega: {

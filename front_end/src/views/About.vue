@@ -2,7 +2,7 @@
   <div>
     <h2>About</h2>
     <!-- componente -->
-    <calculadora-basica />
+    <HelloWorld />
     <!-- card -->
     <v-card class="mx-auto" max-width="344">
       <v-img
@@ -42,14 +42,16 @@
 </template>
 
 <script>
-import CalculadoraBasica from "../components/CalculadoraBasica.vue";
+import Remisiones from "../components/Remisiones.vue";
+import HelloWorld from "@/components/HelloWorld.vue";
 export default {
   data: () => ({
     show: false,
   }),
   components: {
-    CalculadoraBasica,
-  },
+    Remisiones,
+    HelloWorld
+},
   methods: {
     inicio(){
       console.log("ir al home...");

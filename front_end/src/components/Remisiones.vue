@@ -6,34 +6,38 @@
     <!-- Inicio formulario para crear las remisiones -->
     <v-form ref="form" v-model="valid" lazy-validation>
       <v-text-field
-        v-model="nombre"
-        :counter="10"
-        :rules="nombreRules"
-        label="Nombre"
+        v-model="remision"
+        :rules="remisionRules"
+        label="Remision"
         required
       ></v-text-field>
 
       <v-text-field
-        v-model="apellido"
-        :counter="10"
-        :rules="apellidoRules"
-        label="Apellido"
+        v-model="cliente"
+        :rules="clienteRules"
+        label="Cliente"
         required
       ></v-text-field>
 
+      <v-date-picker 
+        v-model="fecha_emision"
+        label="Fecha Emision"
+        ></v-date-picker>
+
+      <v-date-picker 
+        v-model="fecha_entrega"
+        label="Fecha Entrega"
+        ></v-date-picker>
+      
       <v-text-field
-        v-model="edad"
-        :counter="10"
-        :rules="edadRules"
-        label="Edad"
-        required
+        v-model="transportador"
+        :rules="transportadorRules"
+        label="Transportador"
       ></v-text-field>
 
       <v-text-field
-        v-model="email"
-        :rules="emailRules"
-        label="E-mail"
-        required
+        v-model="guia_envio"
+        label="Guia Envio"
       ></v-text-field>
 
       <v-checkbox
@@ -43,10 +47,10 @@
         required
       ></v-checkbox>
 
-      <v-btn v-if="id==null" x-small color="primary" class="mr-4" @click="crearPersonaje()"
+      <v-btn v-if="id==null" x-small color="primary" class="mr-4" @click="crearRemision()"
         >Agregar</v-btn
       >
-      <v-btn v-if="id!=null" x-small color="primary" class="mr-4" @click="actualizarPersonaje(id)"
+      <v-btn v-if="id!=null" x-small color="primary" class="mr-4" @click="actualizarRemision(id)"
         >Actualizar</v-btn
       >
       <v-btn v-if="id!=null" x-small color="error" class="mr-4" v-on:click="btnCancelar"
@@ -70,40 +74,36 @@
         Reset Validation
       </v-btn>
     </v-form>
-    <!-- Fin formulario creación de jugadores -->
+    <!-- Fin formulario creación de remisiones -->
 
     <br />
 
-    <!-- Inicio Tabla con los jugadores (Personajes) -->
+    <!-- Inicio Tabla con las remisiones (entregas) -->
     <v-simple-table>
       <template v-slot:default>
         <thead>
           <tr>
-            <th class="text-center">Nombre</th>
-            <th class="text-center">Apellido</th>
-            <th class="text-center">Edad</th>
-            <th class="text-center">Email</th>
-            <th class="text-center">Acciones</th>
+            <th class="text-center">Remision</th>
+            <th class="text-center">Cliente</th>
+            <th class="text-center">Fecha Emision</th>
+            <th class="text-center">Fecha Entrega</th>
+            <th class="text-center">Transportador</th>
+            <th class="text-center">Guia Envio</th>
+            <th class="text-center">Estado</th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="item in personajes" :key="item._id">
-            <td>{{ item.nombre }}</td>
-            <td>{{ item.apellido }}</td>
-            <td>{{ item.edad }}</td>
-            <td>{{ item.email }}</td>
+          <tr v-for="item in remisiones" :key="item._id">
+            <td>{{ item.remision }}</td>
+            <td>{{ item.cliente }}</td>
+            <td>{{ item.fecha_emision }}</td>
+            <td>{{ item.fecha_entrega }}</td>
+            <td>{{ item.transportador }}</td>
+            <td>{{ item.guia_envio }}</td>
+            <td>{{ item.estado }}</td>
             <td>
               <v-btn
-                @click="eliminarPersonaje(item._id)"
-                color="error"
-                elevation="12"
-                rounded
-                x-small
-                class="mr-4"
-                >Eliminar</v-btn
-              >
-              <v-btn
-                @click="btnActualizar(item._id, item.nombre, item.apellido, item.edad, item.email)"
+                @click="btnActualizar(item._id, item.remision, item.cliente, item.fecha_emision, item.fecha_entrega, item.transportador, item.guia_envio, item.estado)"
                 color="primary"
                 elevation="12"
                 rounded
@@ -116,7 +116,7 @@
         </tbody>
       </template>
     </v-simple-table>
-    <!-- Fin tabla jugadores -->
+    <!-- Fin tabla remisiones -->
   </div>
 </template>
 
@@ -125,67 +125,61 @@ import store from "../store/index.js";
 export default {
   data: () => ({
     valid: true,
-    nombre: "",
-    nombreRules: [
-      (v) => !!v || "Nombre es obligatorio",
-      (v) =>
-        (v && v.length <= 10) || "Nombre debe ser de al menos 10 caracteres",
+    remision: "",
+    remisionRules: [
+      (v) => !!v || "# Remision es obligatorio",
     ],
-    apellido: "",
-    apellidoRules: [
-      (v) => !!v || "Apellido es obligatorio",
-      (v) =>
-        (v && v.length <= 10) || "Apellido debe ser de al menos 10 caracteres",
+    cliente: "",
+    clienteRules: [
+      (v) => !!v || "Nombre Cliente es obligatorio",
     ],
-    edad: "",
-    edadRules: [(v) => !!v || "Edad es obligatorio"],
-    email: "",
-    emailRules: [
-      (v) => !!v || "E-mail es obligatorio",
-      (v) => /.+@.+\..+/.test(v) || "E-mail debe ser válido",
-    ],
+    transportador: "",
+    transportadorRules: [(v) => !!v || "Transportador es obligatorio"],
+    
     checkbox: false,
     id: null,
   }),
   methods: {
-    eliminarPersonaje(id) {
-      let obj = { id };
-      store.dispatch("deletePersonajes", obj).then(() => {
-        store.dispatch("getPersonajes");
-      });
-    },
-    crearPersonaje() {
+    crearRemision() {
       let obj = {
-        nombre: this.nombre,
-        apellido: this.apellido,
-        edad: this.edad,
-        email: this.email,
+        remision: this.remision,
+        cliente: this.cliente,
+        fecha_emision:this.fecha_emision,
+        transportador: this.transportador,
+        guia_envio: this.guia_envio,
+        estado: this.estado,
       };
-      store.dispatch("setPersonajes", obj).then(() => {
-        store.dispatch("getPersonajes");
+      store.dispatch("setRemisiones", obj).then(() => {
+        store.dispatch("getRemisiones");
         this.$refs.form.reset();
       });
     },
-    actualizarPersonaje(id) {
+    actualizarRemision(id) {
       let obj = {
         id: id,
-        nombre: this.nombre,
-        apellido: this.apellido,
-        edad: this.edad,
-        email: this.email,
+        remision: this.remision,
+        cliente: this.cliente,
+        fecha_emision:this.fecha_emision,
+        fecha_entrega:this.fecha_entrega,
+        transportador: this.transportador,
+        guia_envio: this.guia_envio,
+        estado: this.estado,
       };
-      store.dispatch("updatePersonajes", obj).then(() => {
-        store.dispatch("getPersonajes");
+      store.dispatch("updateRemisiones", obj).then(() => {
+        store.dispatch("getRemisiones");
         this.$refs.form.reset();
         this.id = null;
       });
     },
-    btnActualizar(id, nombre, apellido, edad, email){
+    btnActualizar(id, remision, cliente, fecha_emision, fecha_entrega, transportador, guia_envio, estado){
       this.id = id;
-      this.nombre = nombre;
-      this.apellido = apellido;
-      this.edad = edad;
-      this.email = email;
+      this.remision = remision;
+      this.cliente = cliente;
+      this.fecha_emision = fecha_emision;
+      this.fecha_entrega = fecha_entrega;
+      this.transportador = transportador;
+      this.guia_envio = guia_envio;
+      this.estado = estado;
     },
     btnCancelar(){
       this.id = null;
@@ -203,11 +197,11 @@ export default {
   },
   created: () => {
     //dispatch: accede a las acciones del store
-    store.dispatch("getPersonajes");
+    store.dispatch("getRemisiones");
   },
   computed: {
-    personajes: () => {
-      return store.state.personajes;
+    remisiones: () => {
+      return store.state.remisiones;
     },
   },
 };

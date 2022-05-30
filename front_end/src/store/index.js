@@ -21,14 +21,14 @@ export default new Vuex.Store({
       console.log(data);
       commit('setRemisiones', data);
     },
-    //Eliminar personaje mediante su id
-    /*async deletePersonajes({ commit }, personajes) {
+    //Eliminar remision mediante su id
+    /*async deleteDocumento({ commit }, personajes) {
       const peticion = await fetch('http://localhost:3000/users', {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(personajes)
+        body: JSON.stringify(remisiones))
       });
     }, */
     //Agregar Remisiones
