@@ -8,14 +8,13 @@ export default new Vuex.Store({
     remisiones: []
   },
   mutations: {
-    setRemisiones(state, payload) {
+    setDocumentos(state, payload) {
       state.remisiones = payload;
     }
   },
   actions: {
     //Obtener/Consultar Remisiones
     async getDocumentos({ commit }) {
-      //const peticion = await fetch('https://futuramaapi.herokuapp.com/api/v2/characters');
       const peticion = await fetch('http://localhost:3000/documentos');
       const data = await peticion.json();
       console.log(data);
@@ -32,7 +31,7 @@ export default new Vuex.Store({
       });
     }, */
     //Agregar Remisiones
-    async setRemisiones({ commit }, remisiones) {
+    async setDocumentos({ commit }, remisiones) {
       const peticion = await fetch('http://localhost:3000/documentos', {
         method: 'POST',
         headers: {
@@ -42,7 +41,7 @@ export default new Vuex.Store({
       });
     },
     //Actualizar Remisiones
-    async updateRemisiones({ commit }, remisiones) {
+    async updateDocumentos({ commit }, remisiones) {
       const peticion = await fetch('http://localhost:3000/documentos', {
         method: 'PUT',
         headers: {

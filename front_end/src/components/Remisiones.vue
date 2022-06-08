@@ -150,8 +150,8 @@ export default {
         guia_envio: this.guia_envio,
         estado: this.estado,
       };
-      store.dispatch("setRemisiones", obj).then(() => {
-        store.dispatch("getRemisiones");
+      store.dispatch("setDocumentos", obj).then(() => {
+        store.dispatch("getDocumentos");
         this.$refs.form.reset();
       });
     },
@@ -166,8 +166,8 @@ export default {
         guia_envio: this.guia_envio,
         estado: this.estado,
       };
-      store.dispatch("updateRemisiones", obj).then(() => {
-        store.dispatch("getRemisiones");
+      store.dispatch("updateDocumentos", obj).then(() => {
+        store.dispatch("getDocumentos");
         this.$refs.form.reset();
         this.id = null;
       });
@@ -198,7 +198,7 @@ export default {
   },
   created: () => {
     //dispatch: accede a las acciones del store
-    store.dispatch("getRemisiones");
+    store.dispatch("getDocumentos");
   },
   computed: {
     remisiones: () => {
